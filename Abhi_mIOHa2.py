@@ -1,92 +1,79 @@
+# import openai module
 from openai import OpenAI
 
+# create a new client instance, use 'OPENAI_API_KEY' in environment
 client = OpenAI()
 
-# Define the personality for the AI chef
-personality = (
-    "You are a happy, outgoing halwai chef from Uttar Pradesh, India. "
-    "You are talkative and love to cook ethnic Indian food, especially sweets. "
-    "You use common friendly slangs and enjoy sharing your culinary passion. "
-    "If the user inputs a non-Indian dish, you will provide its recipe but also make a comment about preferring Indian cuisine."
+# specific purpose and instruction sets for the system role
+messages = [
+     {
+          "role": "system",
+          "content": "You are a happy, outgoing halwai chef from Uttar Pradesh, India. You are talkative and love to cook ethnic Indian food, especially sweets. You use common friendly slangs and enjoy sharing your culinary passion. If user gives you ingredients then you will suggest user a recipe. if user gives you recipe then you will criticise that recipe",
+     }
+]
+# add the guide on how to response to the user's request
+messages.append(
+     {
+          "role": "system",
+          "content": "Your client is going to ask for a recipe about a specific dish. If you do not recognize the dish, you should not try to generate a recipe for it. Do not answer a recipe if you do not understand the name of the dish. If you know the dish, you must answer directly with a detailed recipe for it. If you don't know the dish, you should answer that you don't know the dish and end the conversation politely.",
+     }
 )
 
-# Initial system prompt
-messages = [
-    {
-        "role": "system",
-        "content": personality,
-    }
-]
-
-# Extend with the specific project requirements
+# receive the input
+dish = input("Type the name of the dish you want a recipe for:\n")
 messages.append(
     {
-        "role": "system",
-        "content": (
-            "Your client will either ask you to suggest a dish based on ingredients, "
-            "give a recipe for a dish, or critique a provided recipe. If the request "
-            "doesn't fit these scenarios, politely ask the user to try again."
-        ),
+        "role": "user",
+        "content": f"Suggest me a detailed recipe and the preparation steps for making {dish}"
     }
 )
 
-# Function to handle user request
-def handle_request(user_input):
-    if user_input.startswith("Ingredients:"):
-        ingredients = user_input[len("Ingredients:"):].strip()
-        messages.append(
-            {
-                "role": "user",
-                "content": f"Suggest a dish with the following ingredients: {ingredients}"
-            }
-        )
-    elif user_input.startswith("Dish:"):
-        dish = user_input[len("Dish:"):].strip()
-        messages.append(
-            {
-                "role": "user",
-                "content": f"Give me a detailed recipe for {dish}"
-            }
-        )
-    elif user_input.startswith("Recipe:"):
-        recipe = user_input[len("Recipe:"):].strip()
-        messages.append(
-            {
-                "role": "user",
-                "content": f"Critique the following recipe: {recipe}"
-            }
-        )
-    else:
-        messages.append(
-            {
-                "role": "user",
-                "content": "Please provide ingredients, a dish name, or a recipe for critique."
-            }
-        )
+# specify the model to use
+model = "gpt-3.5-turbo"
 
-    model = "gpt-3.5-turbo"
-
-    stream = client.chat.completions.create(
+stream = client.chat.completions.create(
         model=model,
         messages=messages,
         stream=True,
     )
 
+collected_messages = []
+for chunk in stream:
+    chunk_message = chunk.choices[0].delta.content or ""
+    print(chunk_message, end="")
+    collected_messages.append(chunk_message)
+
+messages.append(
+    {
+        "role": "system",
+        "content": "".join(collected_messages)
+    }
+)
+
+# allow the user to continue the conversation until cmd+c
+while True:
+    print("\n")
+    user_input = input()
+    messages.append(
+        {
+            "role": "user",
+            "content": user_input
+        }
+    )
+    stream = client.chat.completions.create(
+        model=model,
+        messages=messages,
+        stream=True,
+    )
     collected_messages = []
     for chunk in stream:
         chunk_message = chunk.choices[0].delta.content or ""
         print(chunk_message, end="")
         collected_messages.append(chunk_message)
-
+    
     messages.append(
         {
             "role": "system",
             "content": "".join(collected_messages)
         }
     )
-
-# Main loop
-if __name__ == "__main__":
-    while True:
-        user_input = input("Enter your request (Ingredients:/Dish:/Recipe:):\n")
-        handle_request(user_input)
