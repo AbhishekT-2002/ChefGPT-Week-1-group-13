@@ -1,33 +1,37 @@
-# main.py
-
 import importlib
 
-# Dictionary to map chef names to their corresponding modules
-chefs = {
-    "default": "default_chef",
-    "indian": "Abhi_mIOHa2",
-    "thai": "Ruchida_bOEXwz",
-    "C": "C",
-    "D": "D",
-    "E": "E"
-}
 
-def handle_interaction(chef_module, user_input):
+def run_script(script_name):
+    """
+    Attempts to import and execute the specified script.
+
+    Args:
+        script_name (str): The name of the script (A-E) to be executed.
+
+    Returns:
+        None
+    """
     try:
-        module = importlib.import_module(chef_module)
-        module.handle_request(user_input)
+        module = importlib.import_module(script_name)
+        # Execute the script's code directly
+        exec(open(f"{script_name}.py", "r").read())
+    except ModuleNotFoundError:
+        print(f"Script '{script_name}' not found!")
     except Exception as e:
-        print(f"Error interacting with {chef_module}: {e}")
+        print(f"Error running script '{script_name}': {e}")
 
-def main():
-    while True:
-        print("Choose a chef to interact with: default, indian, B, C, D, E")
-        chef_choice = input().strip()
-        if chef_choice in chefs:
-            user_input = input("Enter your request (Ingredients:/Dish:/Recipe:):\n")
-            handle_interaction(chefs[chef_choice], user_input)
-        else:
-            print("Invalid choice. Please try again.")
 
 if __name__ == "__main__":
-    main()
+    while True:
+        choice = input(
+            " 0. Default \n 1. Indian\n 2. Thai\n 3. EXIT\n Choose a chef to interact with:")
+        if choice == "0":
+            run_script("default_chef")
+        elif choice == "1":
+            run_script("Abhi_mIOHa2")
+        elif choice == "2":
+            run_script("Ruchida_bOEXwz")
+        elif choice == "3":
+            exit()
+        else:
+            print("Invalid input. Please try again.")

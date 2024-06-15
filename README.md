@@ -37,9 +37,7 @@ This project is a collaborative effort to enhance the Chef GPT script by giving 
    ```bash
    python main.py
    ```
-3. **Interact with the AI chefs**: Follow the on-screen instructions to interact with the different AI chefs and enjoy their unique personalities. Choose a chef to interact with: <br>default, indian, B, C, D, E.
-Enter your request (Ingredients:/Dish:/Recipe:).
-## Interaction Flow
+3. **Interaction Flow**:
 - Select Chef: Choose one of the available chefs.
 - Enter Request: Provide ingredients, a dish name, or a recipe for critique.
 - Receive Response: The selected chef will handle the request and provide a response.
