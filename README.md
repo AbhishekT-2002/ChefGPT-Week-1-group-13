@@ -45,12 +45,15 @@ Enter your request (Ingredients:/Dish:/Recipe:).
 - Receive Response: The selected chef will handle the request and provide a response.
 ## Example
 ```plaintext
-Choose a chef to interact with: default, indian, B, C, D, E
-> indian
-Enter your request (Ingredients:/Dish:/Recipe:):
-> Ingredients: rice, sugar, milk
+0. Default
+1. Indian
+2. Thai
+3. Exit
+Choose a chef to interact with: 2
+
+Type the name of the dish you want a recipe for: Tom Yum
 ```
-The Indian chef will suggest a dish based on the provided ingredients.
+The Thai chef will provide the recipe for Tom Yum.
 ## Error Handling
 The main script includes basic error handling to ensure smooth interactions. If an invalid chef is selected or an unexpected error occurs, the user will be prompted to try again.
 
