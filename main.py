@@ -6,7 +6,7 @@ import importlib
 chefs = {
     "default": "default_chef",
     "indian": "Abhi_mIOHa2",
-    "B": "B",
+    "thai": "Ruchida_bOEXwz",
     "C": "C",
     "D": "D",
     "E": "E"

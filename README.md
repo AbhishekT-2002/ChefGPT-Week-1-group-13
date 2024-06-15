@@ -17,7 +17,7 @@ This project is a collaborative effort to enhance the Chef GPT script by giving 
 - `main.py`: The main script that allows users to select and interact with different AI chefs.
 - `default_chef.py`: The default Chef GPT script.
 - `Abhi_mIOHa2.py`: A happy outgoing halwai chef from Uttar Pradesh, India.
-- `B.py`: (Placeholder for script B)
+- `Ruchida_bOEXwz.py`: A polite and create Thai cuisine chef
 - `C.py`: (Placeholder for script C)
 - `D.py`: (Placeholder for script D)
 - `E.py`: (Placeholder for script E)
