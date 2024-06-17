@@ -9,7 +9,7 @@ This project is a collaborative effort to enhance the Chef GPT script by giving 
 - **MCn2Bp** - [@rparthas](https://github.com/rparthas/)
 - **mIOHa2** - [@Abhi](https://github.com/AbhishekT-2002)
 - **wAcaPj** - @junius
-- **KLvOfB** - @prasanth007
+- **KLvOfB** - [@prasanth007](https://github.com/prasanth-ntu)
 
 
 ## Project Structure
@@ -18,7 +18,7 @@ This project is a collaborative effort to enhance the Chef GPT script by giving 
 - `default_chef.py`: The default Chef GPT script.
 - `Abhi_mIOHa2.py`: A happy outgoing halwai chef from Uttar Pradesh, India.
 - `Ruchida_bOEXwz.py`: A polite and create Thai cuisine chef
-- `C.py`: (Placeholder for script C)
+- `rparthas_MCn2Bp.py`: An expert South Indian chef
 - `D.py`: (Placeholder for script D)
 - `E.py`: (Placeholder for script E)
 
@@ -46,7 +46,8 @@ This project is a collaborative effort to enhance the Chef GPT script by giving 
 0. Default
 1. Indian
 2. Thai
-3. Exit
+3. South Indian
+4. Exit
 Choose a chef to interact with: 2
 
 Type the name of the dish you want a recipe for: Tom Yum
