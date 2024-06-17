@@ -24,7 +24,7 @@ def run_script(script_name):
 if __name__ == "__main__":
     while True:
         choice = input(
-            " 0. Default \n 1. Indian\n 2. Thai\n 3. EXIT\n Choose a chef to interact with:")
+            " 0. Default \n 1. Indian\n 2. Thai\n 3. South Indian\n 4. EXIT\n Choose a chef to interact with:")
         if choice == "0":
             run_script("default_chef")
         elif choice == "1":
@@ -32,6 +32,8 @@ if __name__ == "__main__":
         elif choice == "2":
             run_script("Ruchida_bOEXwz")
         elif choice == "3":
+            run_script("rparthas_MCn2Bp")
+        elif choice == "4":
             exit()
         else:
             print("Invalid input. Please try again.")
